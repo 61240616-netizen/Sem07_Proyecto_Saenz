@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Panel Gestión — LogísticaExpress</title>
+  <link rel="stylesheet" href="../CSS/inicio.css">
+  <link rel="stylesheet" href="../CSS/panel.css">
+</head>
+<body>
+  <!-- ENCABEZADO -->
+  <header>
+    <a href="../index.html" class="logo">LogísticaExpress</a>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="servicios.html">Servicios</a></li>
+        <li><a href="panel.html" class="active">Panel Global</a></li>
+        <li><a href="#" id="btn-cerrar-sesion" class="btn-login-nav">Cerrar Sesión</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="panel-container">
+    <div class="panel-header">
+      <h1>Panel Global de Envíos (CRUD)</h1>
+      <span class="user-rol">Administración</span>
+    </div>
+    <div class="tabla-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Código</th>
+            <th>Cliente</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-panel"></tbody>
+      </table>
+    </div>
+  </main>
+  
+  <script type="module" src="../JS/panel/panel.js"></script>
+  <script type="module">
+    import { cerrarSesion } from '../JS/auth/auth.js';
+    document.getElementById('btn-cerrar-sesion')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      cerrarSesion();
+    });
+  </script>
+</body>
+</html>

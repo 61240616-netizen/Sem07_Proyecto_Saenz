@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Cotizador de envíos - LogísticaExpress">
+  <title>Cotizador — LogísticaExpress</title>
+  <link rel="stylesheet" href="../CSS/formulario.css">
+</head>
+<body>
+
+  <!-- ENCABEZADO -->
+  <header>
+    <a href="../index.html" class="logo">LogísticaExpress</a>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="servicios.html">Servicios</a></li>
+        <li class="dropdown">
+          <a href="requisitos.html">Cómo funciona</a>
+          <ul class="dropdown-menu">
+            <li><a href="requisitos.html#pasos">Pasos para enviar</a></li>
+            <li><a href="requisitos.html#requisitos">Requisitos por tipo</a></li>
+            <li><a href="requisitos.html#prohibidos">Artículos prohibidos</a></li>
+          </ul>
+        </li>
+        <li><a href="formulario.html" class="active">Cotizador</a></li>
+        <li><a href="contacto.html">Ubicación</a></li>
+        <li><a href="consulta.html">Mis Cotizaciones</a></li>
+          <li><a href="#" id="btn-cerrar-sesion" class="btn-login-nav">Cerrar Sesión</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <h1>Cotizador de Envíos</h1>
+      <p class="subtitulo">Calcula el costo estimado de tu paquete al instante.</p>
+    </section>
+
+    <div class="cotizador-wrapper">
+      <!-- TARJETA DEL FORMULARIO -->
+      <section class="form-card">
+        <form class="cotizador-form" id="form-cotizador">
+          <div class="form-group">
+            <label for="origen">Origen <span class="req">*</span></label>
+            <select id="origen" required>
+              <option value="">Seleccione origen</option>
+              <option value="tarapoto">Tarapoto</option>
+              <option value="moyobamba">Moyobamba</option>
+              <option value="lima">Lima</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="destino">Destino <span class="req">*</span></label>
+            <select id="destino" required>
+              <option value="">Seleccione destino</option>
+              <option value="lima">Lima</option>
+              <option value="chiclayo">Chiclayo</option>
+              <option value="yurimaguas">Yurimaguas</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="peso">Peso (kg) <span class="req">*</span></label>
+            <input type="number" id="peso" min="0.1" step="0.1" required placeholder="Ej: 2.5">
+          </div>
+
+          <button type="submit" class="btn-cotizar">Calcular Costo</button>
+        </form>
+
+        <!-- CAJA DE RESULTADO Y BOTÓN "COTIZAR" -->
+        <div id="resultado-cotizacion" class="confirmacion-cotizacion" style="display: none;"></div>
+
+        <!-- LÍNEA DE TIEMPO / ANIMACIÓN DE PROCESO (OCULTA INICIALMENTE) -->
+        <div id="timeline-cotizacion" class="timeline-wrapper" style="display: none;">
+          <p class="timeline-title">Proyección del proceso de envío:</p>
+          <div class="timeline">
+            <div class="timeline-bg"></div>
+            <div class="timeline-bar"></div>
+
+            <div class="timeline-step active">
+              <div class="step-dot"></div>
+              <span class="step-label">Recepción</span>
+            </div>
+            <div class="timeline-step active">
+              <div class="step-dot"></div>
+              <span class="step-label">En Tránsito</span>
+            </div>
+            <div class="timeline-step active">
+              <div class="step-dot"></div>
+              <span class="step-label">En Reparto</span>
+            </div>
+            <div class="timeline-step">
+              <div class="step-dot"></div>
+              <span class="step-label">Entregado</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACTO PERSONALIZADO -->
+      <aside class="info-sidebar">
+        <div class="sidebar-box">
+          <h3>¿Necesitas ayuda personalizada?</h3>
+          <p>Escríbenos por WhatsApp para cotizaciones corporativas o carga pesada.</p>
+          <a href="https://web.whatsapp.com/" target="_blank" class="btn-whatsapp">Contactar por WhatsApp</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- PIE DE PÁGINA -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <h3>LogísticaExpress</h3>
+        <p>Soluciones logísticas en la región San Martín y a nivel nacional.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="servicios.html">Servicios</a></li>
+          <li><a href="contacto.html">Ubicación</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 LogísticaExpress — Proyecto de Diseño Web.</p>
+    </div>
+  </footer>
+
+  <!-- IMPORTACIÓN DEL MÓDULO JS CON LA CONEXIÓN A NEON -->
+  <script type="module" src="../JS/registro/registro.js"></script>
+</body>
+</html>

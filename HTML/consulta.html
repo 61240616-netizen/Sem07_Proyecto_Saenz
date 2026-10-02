@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mis Cotizaciones — LogísticaExpress</title>
+  <link rel="stylesheet" href="../CSS/inicio.css">
+  <link rel="stylesheet" href="../CSS/consulta.css">
+</head>
+<body>
+  <!-- ENCABEZADO -->
+  <header>
+    <a href="../index.html" class="logo">LogísticaExpress</a>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="servicios.html">Servicios</a></li>
+        <li><a href="formulario.html">Cotizador</a></li>
+        <li><a href="consulta.html" class="active">Mis Cotizaciones</a></li>
+        <li><a href="#" id="btn-cerrar-sesion" class="btn-login-nav">Cerrar Sesión</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="contenedor-consulta">
+    <h1>Mis Cotizaciones de Envío</h1>
+    <div class="tabla-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Origen</th>
+            <th>Destino</th>
+            <th>Peso</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-registros"></tbody>
+      </table>
+    </div>
+  </main>
+  
+  <!-- PIE DE PÁGINA (Resumido para no alargar) -->
+  <footer>
+    <div class="footer-bottom">
+      <p>&copy; 2026 LogísticaExpress — Proyecto de Diseño Web.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="../JS/consulta/consulta.js"></script>
+  <script type="module">
+    import { cerrarSesion } from '../JS/auth/auth.js';
+    document.getElementById('btn-cerrar-sesion')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      cerrarSesion();
+    });
+  </script>
+</body>
+</html>
