@@ -23,15 +23,36 @@
   <main class="panel-container">
     <div class="panel-header">
       <h1>Panel Global de Envíos (CRUD)</h1>
-      <span class="user-rol">Administración</span>
+      <span class="user-rol" id="etiqueta-rol">Administración</span>
     </div>
+
+    <!-- BARRA DE HERRAMIENTAS: BUSCADOR Y CREAR -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
+      
+      <!-- Consultar / Buscar -->
+      <div style="display: flex; gap: 10px;">
+        <input type="text" id="input-busqueda" placeholder="Buscar por código o cliente..." style="padding: 10px; border: 1px solid #ccc; border-radius: 6px; width: 280px; font-family: inherit;">
+        <button id="btn-buscar" style="background:#ffb800; color:#0d2c6c; border:none; padding:10px 20px; border-radius:6px; font-weight:bold; cursor:pointer;">Consultar</button>
+        <button id="btn-limpiar" style="background:#e2e8f0; color:#475569; border:none; padding:10px 15px; border-radius:6px; font-weight:bold; cursor:pointer; display:none;">Limpiar</button>
+      </div>
+
+      <!-- Crear -->
+      <div>
+        <a href="formulario.html" style="background:#0d2c6c; color:white; padding:10px 20px; text-decoration:none; border-radius:8px; font-weight:bold;">+ Crear Nuevo Registro</a>
+      </div>
+      
+    </div>
+
     <div class="tabla-wrapper">
       <table>
         <thead>
           <tr>
-            <th>ID</th>
             <th>Código</th>
-            <th>Cliente</th>
+            <th>Remitente</th>
+            <th>Origen</th>
+            <th>Destino</th>
+            <th>Peso</th>
+            <th>Fecha y Hora</th>
             <th>Estado</th>
             <th>Acciones</th>
           </tr>
@@ -42,12 +63,5 @@
   </main>
   
   <script type="module" src="../JS/panel/panel.js"></script>
-  <script type="module">
-    import { cerrarSesion } from '../JS/auth/auth.js';
-    document.getElementById('btn-cerrar-sesion')?.addEventListener('click', (e) => {
-      e.preventDefault();
-      cerrarSesion();
-    });
-  </script>
 </body>
 </html>
