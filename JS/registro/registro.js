@@ -1,5 +1,6 @@
-// JS/registro.js
-import { sql } from './neon-config.js';
+// JS/registro/registro.js
+import { sql } from '../config/neon-config.js'; // <-- ¡RUTA CORREGIDA!
+import { cerrarSesion } from '../auth/auth.js'; // <-- Importado arriba por orden
 
 // 1. Redirigir a login.html si no hay sesión activa
 const usuarioSesion = JSON.parse(sessionStorage.getItem('usuario'));
@@ -14,9 +15,10 @@ export async function guardarRegistro(datos) {
   // Si no viene nombre_remitente, se toma de la sesión activa
   const nombreRemitente = datos.nombre_remitente || usuarioSesion.nombre || 'Usuario Registrado';
 
+  // ¡AGREGAMOS id_usuario PARA QUE SE RELACIONE CON EL CLIENTE!
   await sql`
-    INSERT INTO cotizaciones_envio (codigo_seguimiento, nombre_remitente, origen, destino, peso) 
-    VALUES (${codigo}, ${nombreRemitente}, ${datos.origen}, ${datos.destino}, ${datos.peso})
+    INSERT INTO cotizaciones_envio (codigo_seguimiento, nombre_remitente, origen, destino, peso, id_usuario) 
+    VALUES (${codigo}, ${nombreRemitente}, ${datos.origen}, ${datos.destino}, ${datos.peso}, ${usuarioSesion.id})
   `;
   
   return codigo;
@@ -113,11 +115,11 @@ document.addEventListener('DOMContentLoaded', () => {
           // RECIÉN AQUÍ SE MUESTRA Y ACTIVA LA ANIMACIÓN
           if (timelineDiv) {
             timelineDiv.style.display = 'block';
-            const bar = timelineDiv.querySelector('.timeline-bar');
+            const bar = document.getElementById('barra-progreso');
             if (bar) {
+              // Forzamos la barra a quedarse en el paso 1 (Recepción)
               bar.style.animation = 'none';
-              void bar.offsetWidth; // Reiniciar animación CSS
-              bar.style.animation = 'animarProgreso 2.5s ease-out forwards';
+              bar.style.width = '15%'; 
             }
           }
         } catch (error) {
@@ -129,15 +131,13 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  // Activa el botón de cerrar sesión
+  const btnCerrar = document.getElementById('btn-cerrar-sesion');
+  if (btnCerrar) {
+    btnCerrar.addEventListener('click', (e) => {
+      e.preventDefault();
+      cerrarSesion();
+    });
+  }
 });
-
-import { cerrarSesion } from '../auth/auth.js';
-
-// Activa el botón de cerrar sesión
-const btnCerrar = document.getElementById('btn-cerrar-sesion');
-if (btnCerrar) {
-  btnCerrar.addEventListener('click', (e) => {
-    e.preventDefault();
-    cerrarSesion();
-  });
-}
