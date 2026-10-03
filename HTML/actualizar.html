@@ -2,17 +2,78 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Actualizar Envío</title>
-  <link rel="stylesheet" href="css/actualizar.css">
+  <title>Actualizar Cotización — LogísticaExpress</title>
+  <link rel="stylesheet" href="../CSS/inicio.css">
+  <link rel="stylesheet" href="../CSS/actualizar.css">
 </head>
 <body>
-  <h2>Modificar Cotización</h2>
-  <form id="form-actualizar">
-    <label>Origen: <input type="text" id="edit-origen" required></label>
-    <label>Destino: <input type="text" id="edit-destino" required></label>
-    <label>Peso: <input type="number" step="0.1" id="edit-peso" required></label>
-    <button type="submit" id="btn-guardar">Actualizar</button>
-  </form>
-  <script type="module" src="js/actualizar/actualizar.js"></script>
+  <!-- ENCABEZADO -->
+  <header>
+    <a href="../index.html" class="logo">LogísticaExpress</a>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="servicios.html">Servicios</a></li>
+        <li><a href="#" id="btn-cerrar-sesion" class="btn-login-nav">Cerrar Sesión</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main style="display: flex; justify-content: center; padding: 40px 20px;">
+    <div class="form-card" style="width: 100%; max-width: 500px; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+      <h2 style="color: #0d2c6c; text-align: center; margin-bottom: 20px;">Detalle de Cotización</h2>
+      
+      <form id="form-actualizar">
+        <div style="margin-bottom: 15px;">
+          <label style="display: block; font-weight: bold; margin-bottom: 5px;">Origen:</label>
+          <select id="edit-origen" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px;">
+            <option value="tarapoto">Tarapoto</option>
+            <option value="moyobamba">Moyobamba</option>
+            <option value="lima">Lima</option>
+            <option value="chiclayo">Chiclayo</option>
+            <option value="yurimaguas">Yurimaguas</option>
+          </select>
+        </div>
+
+        <div style="margin-bottom: 15px;">
+          <label style="display: block; font-weight: bold; margin-bottom: 5px;">Destino:</label>
+          <select id="edit-destino" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px;">
+            <option value="lima">Lima</option>
+            <option value="chiclayo">Chiclayo</option>
+            <option value="yurimaguas">Yurimaguas</option>
+            <option value="tarapoto">Tarapoto</option>
+            <option value="moyobamba">Moyobamba</option>
+          </select>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+          <label style="display: block; font-weight: bold; margin-bottom: 5px;">Peso (kg):</label>
+          <input type="number" id="edit-peso" step="0.1" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px;">
+        </div>
+
+        <!-- Solo Administradores o Empleados verán este campo -->
+        <div id="div-estado" style="margin-bottom: 20px; display: none; padding-top: 15px; border-top: 1px solid #eee;">
+          <label style="display: block; font-weight: bold; margin-bottom: 5px; color: #b91c1c;">Actualizar Estado del Envío:</label>
+          <select id="edit-estado" style="width: 100%; padding: 10px; border: 2px solid #ffb800; border-radius: 6px;">
+            <option value="registrado">Registrado</option>
+            <option value="en tránsito">En tránsito</option>
+            <option value="finalizado">Finalizado</option>
+            <option value="cancelado">Cancelado</option>
+          </select>
+        </div>
+
+        <button type="submit" id="btn-guardar" style="width: 100%; background: #0d2c6c; color: white; border: none; padding: 12px; font-weight: bold; border-radius: 6px; cursor: pointer;">Guardar Cambios</button>
+      </form>
+    </div>
+  </main>
+
+  <script type="module" src="../JS/actualizar/actualizar.js"></script>
+  <script type="module">
+    import { cerrarSesion } from '../JS/auth/auth.js';
+    document.getElementById('btn-cerrar-sesion')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      cerrarSesion();
+    });
+  </script>
 </body>
 </html>
