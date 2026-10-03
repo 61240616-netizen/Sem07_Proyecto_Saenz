@@ -1,4 +1,4 @@
-// JS/auth.js
+// JS/auth/auth.js
 import { sql } from '../config/neon-config.js';
 
 export async function registrarUsuario(nombre, correo, contrasena) {
@@ -6,8 +6,9 @@ export async function registrarUsuario(nombre, correo, contrasena) {
 }
 
 export async function iniciarSesion(correo, contrasena) {
+  // 1. Agregado el 'rol' en el SELECT para que JavaScript sepa quién entra
   const filas = await sql`
-    SELECT id, nombre FROM usuarios
+    SELECT id, nombre, rol FROM usuarios
     WHERE correo = ${correo} AND contrasena = ${contrasena};
   `;
   if (filas.length === 0) return null;
@@ -17,6 +18,17 @@ export async function iniciarSesion(correo, contrasena) {
 
 export function cerrarSesion() {
   sessionStorage.removeItem('usuario');
+  window.location.href = 'login.html'; // 2. Agregada la redirección obligatoria al salir
+}
+
+// 3. Agregada la función exigirSesion para proteger el panel y el cotizador
+export function exigirSesion() {
+  const usuarioStr = sessionStorage.getItem('usuario');
+  if (!usuarioStr) {
+    window.location.href = 'login.html';
+    return null;
+  }
+  return JSON.parse(usuarioStr);
 }
 
 // EVENTOS DE PESTAÑAS Y FORMULARIOS
@@ -80,7 +92,12 @@ document.addEventListener('DOMContentLoaded', () => {
       try {
         const usuario = await iniciarSesion(correo, contrasena);
         if (usuario) {
-          window.location.href = 'formulario.html';
+          // 4. Condicional de roles: Admin/Empleado van al panel, Cliente al formulario
+          if (usuario.rol === 'administrador' || usuario.rol === 'empleado') {
+            window.location.href = 'panel.html';
+          } else {
+            window.location.href = 'formulario.html';
+          }
         } else {
           alert('Correo o contraseña incorrectos.');
         }
