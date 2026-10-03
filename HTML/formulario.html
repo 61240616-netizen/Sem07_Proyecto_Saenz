@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Cotizador de envíos - LogísticaExpress">
   <title>Cotizador — LogísticaExpress</title>
   <link rel="stylesheet" href="../CSS/formulario.css">
 </head>
@@ -27,7 +26,7 @@
         <li><a href="formulario.html" class="active">Cotizador</a></li>
         <li><a href="contacto.html">Ubicación</a></li>
         <li><a href="consulta.html">Mis Cotizaciones</a></li>
-          <li><a href="#" id="btn-cerrar-sesion" class="btn-login-nav">Cerrar Sesión</a></li>
+        <li><a href="#" id="btn-cerrar-sesion" class="btn-login-nav">Cerrar Sesión</a></li>
       </ul>
     </nav>
   </header>
@@ -39,7 +38,6 @@
     </section>
 
     <div class="cotizador-wrapper">
-      <!-- TARJETA DEL FORMULARIO -->
       <section class="form-card">
         <form class="cotizador-form" id="form-cotizador">
           <div class="form-group">
@@ -70,28 +68,32 @@
           <button type="submit" class="btn-cotizar">Calcular Costo</button>
         </form>
 
-        <!-- CAJA DE RESULTADO Y BOTÓN "COTIZAR" -->
         <div id="resultado-cotizacion" class="confirmacion-cotizacion" style="display: none;"></div>
 
-        <!-- LÍNEA DE TIEMPO / ANIMACIÓN DE PROCESO (OCULTA INICIALMENTE) -->
+        <!-- LÍNEA DE TIEMPO AJUSTADA A LOS NUEVOS ESTADOS -->
         <div id="timeline-cotizacion" class="timeline-wrapper" style="display: none;">
-          <p class="timeline-title">Proyección del proceso de envío:</p>
+          <p class="timeline-title">Estado de tu nuevo envío:</p>
           <div class="timeline">
             <div class="timeline-bg"></div>
-            <div class="timeline-bar"></div>
+            <!-- La barra de progreso la controlaremos desde JS -->
+            <div class="timeline-bar" id="barra-progreso" style="width: 0%;"></div>
 
+            <!-- Paso 1 (Activo al crear) -->
             <div class="timeline-step active">
               <div class="step-dot"></div>
               <span class="step-label">Recepción</span>
             </div>
-            <div class="timeline-step active">
+            <!-- Paso 2 (Inactivo al inicio) -->
+            <div class="timeline-step">
               <div class="step-dot"></div>
-              <span class="step-label">En Tránsito</span>
+              <span class="step-label">En tránsito</span>
             </div>
-            <div class="timeline-step active">
+            <!-- Paso 3 (Inactivo al inicio) -->
+            <div class="timeline-step">
               <div class="step-dot"></div>
-              <span class="step-label">En Reparto</span>
+              <span class="step-label">En local</span>
             </div>
+            <!-- Paso 4 (Inactivo al inicio) -->
             <div class="timeline-step">
               <div class="step-dot"></div>
               <span class="step-label">Entregado</span>
@@ -100,7 +102,6 @@
         </div>
       </section>
 
-      <!-- CONTACTO PERSONALIZADO -->
       <aside class="info-sidebar">
         <div class="sidebar-box">
           <h3>¿Necesitas ayuda personalizada?</h3>
@@ -111,7 +112,6 @@
     </div>
   </main>
 
-  <!-- PIE DE PÁGINA -->
   <footer>
     <div class="footer-container">
       <div class="footer-col">
@@ -132,7 +132,6 @@
     </div>
   </footer>
 
-  <!-- IMPORTACIÓN DEL MÓDULO JS CON LA CONEXIÓN A NEON -->
   <script type="module" src="../JS/registro/registro.js"></script>
 </body>
 </html>
