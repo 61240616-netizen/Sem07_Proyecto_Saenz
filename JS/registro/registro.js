@@ -17,26 +17,10 @@ export async function guardarRegistro(datos) {
 
   // ¡AGREGAMOS id_usuario PARA QUE SE RELACIONE CON EL CLIENTE!
   await sql`
-    INSERT INTO cotizaciones_envio (
-      codigo_seguimiento,
-      nombre_remitente,
-      origen,
-      destino,
-      peso,
-      id_usuario,
-      fecha_registro
-    ) 
-    VALUES (
-      ${codigo},
-      ${nombreRemitente},
-      ${datos.origen},
-      ${datos.destino},
-      ${datos.peso},
-      ${usuarioSesion.id},
-      CURRENT_TIMESTAMP AT TIME ZONE 'America/Lima'
-    )
+    INSERT INTO cotizaciones_envio (codigo_seguimiento, nombre_remitente, origen, destino, peso, id_usuario) 
+    VALUES (${codigo}, ${nombreRemitente}, ${datos.origen}, ${datos.destino}, ${datos.peso}, ${usuarioSesion.id})
   `;
-
+  
   return codigo;
 }
 
